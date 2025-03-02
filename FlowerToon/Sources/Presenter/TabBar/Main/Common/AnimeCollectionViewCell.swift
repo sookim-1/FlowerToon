@@ -14,7 +14,7 @@ final class AnimeCollectionViewCell: UICollectionViewCell, UIConfigurable {
     lazy var titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 16, weight: .bold)
         $0.numberOfLines = 0
-        $0.textColor = .white
+        $0.textColor = .label
     }
     
     lazy var imageView = UIImageView().then {

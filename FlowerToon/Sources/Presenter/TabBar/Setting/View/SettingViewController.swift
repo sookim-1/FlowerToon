@@ -12,7 +12,7 @@ import Then
 final class SettingViewController: BaseUIViewController {
     
     private lazy var completeLabel = UILabel().then {
-        $0.textColor = .white
+        $0.textColor = .black
         $0.text = "추후 업데이트 예정입니다 😅"
     }
 

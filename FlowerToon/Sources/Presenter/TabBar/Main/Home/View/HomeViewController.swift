@@ -21,7 +21,7 @@ enum Season: String, CaseIterable {
 final class HomeViewController: BaseUIViewController {
 
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
-        $0.backgroundColor = .black
+        $0.backgroundColor = .white
         $0.delegate = self
     }
 
