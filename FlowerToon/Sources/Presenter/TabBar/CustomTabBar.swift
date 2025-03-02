@@ -9,17 +9,30 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxGesture
+import SnapKit
+import Then
 
-final class CustomTabBar: UIStackView, UIConfigurable {
+final class CustomTabBar: UIView, UIConfigurable {
 
     var itemTapped: Observable<Int> { itemTappedSubject.asObservable() }
 
-    private lazy var customItemViews: [CustomItemView] = [homeItem, searchItem, mylistItem, settingItem]
+    private lazy var customItemViews: [CustomItemView] = [homeItem, searchItem, addItem, rankingItem, myPageItem]
+
+    private lazy var tapMenuStackView = UIStackView(arrangedSubviews: customItemViews).then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.alignment = .lastBaseline
+    }
 
     private let homeItem = CustomItemView(with: .home, index: 0)
     private let searchItem = CustomItemView(with: .search, index: 1)
-    private let mylistItem = CustomItemView(with: .mylist, index: 2)
-    private let settingItem = CustomItemView(with: .setting, index: 3)
+    private let addItem = CustomItemView(with: .add, index: 2)
+    private let rankingItem = CustomItemView(with: .ranking, index: 3)
+    private let myPageItem = CustomItemView(with: .mypage, index: 4)
+
+    private let dividerView = UIView().then {
+        $0.backgroundColor = .lightGray.withAlphaComponent(0.3)
+    }
 
     private let itemTappedSubject = PublishSubject<Int>()
     private let disposeBag = DisposeBag()
@@ -29,6 +42,7 @@ final class CustomTabBar: UIStackView, UIConfigurable {
 
         setupHierarchy()
         setupProperties()
+        setupLayout()
         bind()
 
         setNeedsLayout()
@@ -41,18 +55,24 @@ final class CustomTabBar: UIStackView, UIConfigurable {
     }
 
     func setupHierarchy() {
-        self.addArrangedSubviews(customItemViews)
+        self.addSubviews(dividerView, tapMenuStackView)
     }
 
     func setupLayout() {
+        dividerView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.height.equalTo(0.5)
+            $0.leading.trailing.equalToSuperview()
+        }
 
+        tapMenuStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerView.snp.bottom).offset(5)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
 
     func setupProperties() {
-        distribution = .fillEqually
-        alignment = .center
-        backgroundColor = .systemIndigo
-        layer.cornerRadius = 30
     }
 
     private func selectItem(index: Int) {
@@ -85,28 +105,51 @@ final class CustomTabBar: UIStackView, UIConfigurable {
             }
             .disposed(by: disposeBag)
 
-        mylistItem.rx.tapGesture()
+        addItem.rx.tapGesture()
+            .when(.recognized)
+            .bind { [weak self] _ in
+                guard let self
+                else { return }
+
+                self.addItem.animateClick {
+                    self.selectItem(index: self.addItem.index)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        rankingItem.rx.tapGesture()
             .when(.recognized)
             .bind { [weak self] _ in
                 guard let self 
                 else { return }
                 
-                self.mylistItem.animateClick {
-                    self.selectItem(index: self.mylistItem.index)
+                self.rankingItem.animateClick {
+                    self.selectItem(index: self.rankingItem.index)
                 }
             }
             .disposed(by: disposeBag)
 
-        settingItem.rx.tapGesture()
+        myPageItem.rx.tapGesture()
             .when(.recognized)
             .bind { [weak self] _ in
                 guard let self
                 else { return }
                 
-                self.settingItem.animateClick {
-                    self.selectItem(index: self.settingItem.index)
+                self.myPageItem.animateClick {
+                    self.selectItem(index: self.myPageItem.index)
                 }
             }
             .disposed(by: disposeBag)
     }
+
+    func tabBarHidden(hidden: Bool) {
+        self.dividerView.snp.updateConstraints {
+            $0.height.equalTo(hidden ? 0 : 0.5)
+        }
+
+        self.tapMenuStackView.snp.updateConstraints {
+            $0.top.equalTo(self.dividerView.snp.bottom).offset(hidden ? 0 : 5)
+        }
+    }
+
 }

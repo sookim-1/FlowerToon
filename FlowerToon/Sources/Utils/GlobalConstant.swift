@@ -9,6 +9,6 @@ import Foundation
 
 struct GlobalConstant {
 
-    static let customTabBarHeight: CGFloat = 120 + DeviceUI.shared.safeAreaBottomHeight
+    static let customTabBarHeight: CGFloat = 80
 
 }

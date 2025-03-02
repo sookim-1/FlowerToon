@@ -15,12 +15,12 @@ final class SectionTitleHeaderView: UICollectionReusableView, UIConfigurable {
     
     lazy var sectionTitleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 26, weight: .bold)
-        $0.textColor = .white
+        $0.textColor = .black
     }
     
     lazy var moreButton = UIButton().then {
         $0.setBackgroundImage(UIImage(systemName: "arrowshape.turn.up.right.circle"), for: .normal)
-        $0.tintColor = .white
+        $0.tintColor = .black
     }
 
     var disposeBag = DisposeBag()

@@ -10,8 +10,9 @@ import UIKit
 enum CustomTabItem: String, CaseIterable {
     case home
     case search
-    case mylist
-    case setting
+    case add
+    case ranking
+    case mypage
 }
 
 extension CustomTabItem {
@@ -19,39 +20,45 @@ extension CustomTabItem {
     var icon: UIImage? {
         switch self {
         case .home:
-            return UIImage(systemName: "house")?.withTintColor(.white.withAlphaComponent(0.4), renderingMode: .alwaysOriginal)
+            return UIImage(systemName: "house")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         case .search:
-            return UIImage(systemName: "magnifyingglass.circle")?.withTintColor(.white.withAlphaComponent(0.4), renderingMode: .alwaysOriginal)
-        case .mylist:
-            return UIImage(systemName: "list.bullet.rectangle")?.withTintColor(.white.withAlphaComponent(0.4), renderingMode: .alwaysOriginal)
-        case .setting:
-            return UIImage(systemName: "gearshape")?.withTintColor(.white.withAlphaComponent(0.4), renderingMode: .alwaysOriginal)
+            return UIImage(systemName: "magnifyingglass.circle")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        case .add:
+            return UIImage(systemName: "magnifyingglass.circle")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        case .ranking:
+            return UIImage(systemName: "list.bullet.rectangle")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+        case .mypage:
+            return UIImage(systemName: "person.circle.fill")?.withTintColor(.lightGray, renderingMode: .alwaysOriginal)
         }
     }
 
     var selectedIcon: UIImage? {
         switch self {
         case .home:
-            return UIImage(systemName: "house.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            return UIImage(systemName: "house.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         case .search:
-            return UIImage(systemName: "magnifyingglass.circle.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        case .mylist:
-            return UIImage(systemName: "list.bullet.rectangle.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        case .setting:
-            return UIImage(systemName: "gearshape.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+            return UIImage(systemName: "magnifyingglass.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        case .add:
+            return UIImage(systemName: "magnifyingglass.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        case .ranking:
+            return UIImage(systemName: "list.bullet.rectangle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        case .mypage:
+            return UIImage(systemName: "person.circle.fill")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         }
     }
 
     var name: String {
         switch self {
         case .home:
-            return "홈"
+            return "Home"
         case .search:
-            return "검색"
-        case .mylist:
-            return "나의 목록"
-        case .setting:
-            return "설정"
+            return "Search"
+        case .add:
+            return "Add"
+        case .ranking:
+            return "Ranking"
+        case .mypage:
+            return "MyPage"
         }
     }
 

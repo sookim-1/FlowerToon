@@ -14,9 +14,9 @@ final class CustomItemView: BaseUIView {
     private lazy var containerView = UIView()
 
     private lazy var nameLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 11, weight: .semibold)
+        $0.font = .pretendard(.medium, size: 12)
         $0.text = item.name
-        $0.textColor = .white.withAlphaComponent(0.4)
+        $0.textColor = .lightGray
         $0.textAlignment = .center
     }
 
@@ -25,7 +25,7 @@ final class CustomItemView: BaseUIView {
     }
 
     private lazy var underlineView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = .black
         $0.layer.cornerRadius = 2
     }
 
@@ -67,7 +67,7 @@ final class CustomItemView: BaseUIView {
         }
 
         iconImageView.snp.makeConstraints {
-            $0.height.width.equalTo(40)
+            $0.height.width.equalTo(24)
             $0.top.equalToSuperview()
             $0.bottom.equalTo(nameLabel.snp.top)
             $0.centerX.equalToSuperview()
