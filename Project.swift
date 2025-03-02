@@ -3,18 +3,18 @@ import ProjectDescription
 // MARK: - 스키마
 let schemes: [Scheme] = [
     Scheme.scheme(
-        name: "Geek Report Debug",
+        name: "FlowerToon Debug",
         shared: true,
-        buildAction: .buildAction(targets: ["GeekReport"]),
+        buildAction: .buildAction(targets: ["FlowerToon"]),
         runAction: .runAction(configuration: "Debug"),
         archiveAction: .archiveAction(configuration: "Debug"),
         profileAction: .profileAction(configuration: "Debug"),
         analyzeAction: .analyzeAction(configuration: "Debug")
     ),
     Scheme.scheme(
-        name: "GeekReport",
+        name: "FlowerToon",
         shared: true,
-        buildAction: .buildAction(targets: ["GeekReport"]),
+        buildAction: .buildAction(targets: ["FlowerToon"]),
         runAction: .runAction(configuration: "Release"),
         archiveAction: .archiveAction(configuration: "Release"),
         profileAction: .profileAction(configuration: "Release"),
@@ -26,11 +26,11 @@ let schemes: [Scheme] = [
 let configurations: [Configuration] = [
     .debug(
         name: "Debug",
-        xcconfig: .relativeToRoot("Configurations/GeekReportBeta.xcconfig")
+        xcconfig: .relativeToRoot("Configurations/FlowerToonBeta.xcconfig")
     ),
     .release(
         name: "Release",
-        xcconfig: .relativeToRoot("Configurations/GeekReportRelease.xcconfig")
+        xcconfig: .relativeToRoot("Configurations/FlowerToonRelease.xcconfig")
     )
 ]
 
@@ -39,14 +39,14 @@ let settings = Settings.settings(configurations: configurations)
 
 
 // MARK: - 타겟
-let geekReportTarget = Target.target(name: "GeekReport",
+let flowerToonTarget = Target.target(name: "FlowerToon",
                                      destinations: [.iPhone],
                                      product: .app,
-                                     bundleId: "com.sookim.GeekReport",
+                                     bundleId: "com.sookim.FlowerToon",
                                      deploymentTargets: .iOS("17.0"),
-                                     infoPlist: "GeekReport/Info.plist",
-                                     sources: ["GeekReport/Sources/**"],
-                                     resources: ["GeekReport/Resources/**"],
+                                     infoPlist: "FlowerToon/Info.plist",
+                                     sources: ["FlowerToon/Sources/**"],
+                                     resources: ["FlowerToon/Resources/**"],
                                      dependencies: [
                                         .package(product: "SnapKit"),
                                         .package(product: "Then"),
@@ -55,10 +55,10 @@ let geekReportTarget = Target.target(name: "GeekReport",
                                         .package(product: "Kingfisher")
                                      ],
                                      settings: settings,
-                                     coreDataModels: [.coreDataModel(("GeekReport/Sources/Data/PersistentStorage/CoreDataStorage/CoreDataStorage.xcdatamodeld"))])
+                                     coreDataModels: [.coreDataModel(("FlowerToon/Sources/Data/PersistentStorage/CoreDataStorage/CoreDataStorage.xcdatamodeld"))])
 
 // MARK: 프로젝트
-let project = Project(name: "GeekReport",
+let project = Project(name: "FlowerToon",
                       organizationName: "sookim-1",
                       packages: [
                           .remote(url: "https://github.com/SnapKit/SnapKit.git", requirement: .upToNextMajor(from: "5.7.1")),
@@ -68,5 +68,5 @@ let project = Project(name: "GeekReport",
                           .remote(url: "https://github.com/onevcat/Kingfisher.git", requirement: .upToNextMajor(from: "7.11.0"))
                       ],
                       settings: settings,
-                      targets: [geekReportTarget],
+                      targets: [flowerToonTarget],
                       schemes: schemes)
