@@ -14,7 +14,7 @@ import RxCocoa
 final class MoreAnimeViewController: BaseUIViewController {
 
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
-        $0.backgroundColor = .black
+        $0.backgroundColor = .white
     }
 
     lazy var backButton = DefaultBackButton()

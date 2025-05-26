@@ -16,7 +16,6 @@ final class BaseTabBarController: UITabBarController, UIConfigurable {
     private let tabBarNavigationManager = TabBarNavigationManager()
     
     private let customTabBar = CustomTabBar()
-
     private let animeRepository = DefaultAnimeRepository()
     private let disposeBag = DisposeBag()
 
@@ -66,7 +65,7 @@ final class BaseTabBarController: UITabBarController, UIConfigurable {
 
 
     func setupHierarchy() {
-        view.addSubview(customTabBar)
+        view.addSubviews(customTabBar)
     }
 
 
@@ -81,7 +80,7 @@ final class BaseTabBarController: UITabBarController, UIConfigurable {
     func setupProperties() {
         tabBar.isHidden = true
 
-        customTabBar.addShadow()
+        // customTabBar.addShadow()
 
         selectedIndex = 0
         setViewControllers([createHomeNavigationController(), createSearchNavigationController(), createMyListNavigationController(), createSettingNavigationController()], animated: true)
@@ -113,6 +112,8 @@ extension BaseTabBarController: TabBarNavigationManagerDelegate {
         self.customTabBar.snp.updateConstraints { make in
             make.height.equalTo(hidden ? 0 : GlobalConstant.customTabBarHeight)
         }
+
+        self.customTabBar.tabBarHidden(hidden: hidden)
     }
 
 }

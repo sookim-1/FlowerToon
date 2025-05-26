@@ -16,7 +16,7 @@ import RxCocoa
 final class MyListViewController: BaseUIViewController {
     
     private lazy var animeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
-        $0.backgroundColor = .black
+        $0.backgroundColor = .white
     }
     
     enum Section {

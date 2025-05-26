@@ -17,7 +17,7 @@ class BaseUIViewController: UIViewController, UIConfigurable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .black
+        view.backgroundColor = .white
     }
 
     func setupHierarchy() {}

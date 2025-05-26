@@ -31,7 +31,7 @@ final class AnimeDetailViewController: BaseUIViewController {
 
     private lazy var animeTitleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 34, weight: .heavy)
-        $0.textColor = .white
+        $0.textColor = .black
         $0.numberOfLines = 2
         $0.textAlignment = .right
     }
@@ -88,7 +88,7 @@ final class AnimeDetailViewController: BaseUIViewController {
     private lazy var saveButton = UIButton().then {
         $0.setBackgroundColor(.systemYellow, for: .normal)
         $0.setTitle("저장", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.black, for: .normal)
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
     }
